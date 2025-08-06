@@ -44,12 +44,8 @@ cp .env.example .env
 Exemplo de configuração do `.env`:
 ```properties
 DEBUG=True
-SECRET_KEY=sua-chave-secreta
-DB_NAME=salao_db
-DB_USER=postgres
-DB_PASSWORD=sua-senha
-DB_HOST=db
-DB_PORT=5432
+RABBITMQ_DEFAULT_USER=user
+RABBITMQ_DEFAULT_PASS=password
 ```
 
 4. Instale as dependências

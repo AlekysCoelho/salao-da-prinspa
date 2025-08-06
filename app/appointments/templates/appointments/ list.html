@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Agendamentos - Beauty Salon{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/appointments.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="animate-fade-in">
+    <div class="mb-8 flex justify-between items-center">
+        <div>
+            <h2 class="text-3xl font-bold text-text-light mb-2">Agendamentos</h2>
+            <p class="text-gray-400">Gerencie todos os agendamentos do salão</p>
+        </div>
+        <a href="{% url 'appointments:create' %}" class="bg-primary hover:bg-secondary text-dark px-6 py-3 rounded-lg font-medium transition-all duration-200 hover-glow">
+            <i class="fas fa-plus mr-2"></i>Novo Agendamento
+        </a>
+    </div>
+
+    <!-- Filters -->
+    {% include 'appointments/partials/filters.html' %}
+
+    <!-- Appointments Table -->
+    {% include 'appointments/partials/table.html' %}
+</div>
+{% endblock %}
+
+{% block modals %}
+{% include 'appointments/partials/status_modal.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/appointments.js' %}"></script>
+{% endblock %}
