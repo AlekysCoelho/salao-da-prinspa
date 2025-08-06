@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen bg-background">
+    <!-- Header Section -->
+    <header class="bg-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-bold text-textColor">
+                Bem-vindo ao Sistema de Gestão do Salão
+            </h1>
+            <p class="mt-2 text-gray-400">
+                Olá, {{ request.user.username }}! O que você gostaria de fazer hoje?
+            </p>
+        </div>
+    </header>
+
+    <!-- Menu Cards Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cadastro de Clientes -->
+            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="p-6">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-textColor mb-2">Cadastrar Cliente</h3>
+                    <p class="text-gray-400 mb-4">
+                        Registre novos clientes no sistema.
+                    </p>
+                    <a href="{% url 'clients:client_register' %}" 
+                       class="inline-block bg-primary hover:bg-green-400 text-black font-bold py-2 px-4 rounded transition-colors">
+                        Cadastrar
+                    </a>
+                </div>
+            </div>
+
+            <!-- Agendamento -->
+            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="p-6">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-textColor mb-2">Agendar Horário</h3>
+                    <p class="text-gray-400 mb-4">
+                        Crie um novo agendamento.
+                    </p>
+                    <a href="{% url 'appointments:create_appointment' %}" 
+                       class="inline-block bg-primary hover:bg-green-400 text-black font-bold py-2 px-4 rounded transition-colors">
+                        Agendar
+                    </a>
+                </div>
+            </div>
+
+            {% if is_manager %}
+            <!-- Relatórios (Apenas para Gerentes) -->
+            <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div class="p-6">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-textColor mb-2">Relatórios</h3>
+                    <p class="text-gray-400 mb-4">
+                        Acesse os relatórios gerenciais.
+                    </p>
+                    <a href="{% url 'reports:reports' %}" 
+                       class="inline-block bg-primary hover:bg-green-400 text-black font-bold py-2 px-4 rounded transition-colors">
+                        Ver Relatórios
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="bg-gray-800 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-textColor mb-6">Sobre o Salão</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-gray-400">
+                    <h3 class="text-primary font-semibold mb-2">Horário de Funcionamento</h3>
+                    <p>Segunda à Sexta: 9h às 19h</p>
+                    <p>Sábado: 9h às 18h</p>
+                </div>
+                <div class="text-gray-400">
+                    <h3 class="text-primary font-semibold mb-2">Contato</h3>
+                    <p>Telefone: (11) 1234-5678</p>
+                    <p>Email: contato@salao.com</p>
+                </div>
+                <div class="text-gray-400">
+                    <h3 class="text-primary font-semibold mb-2">Localização</h3>
+                    <p>Rua do Salão, 123</p>
+                    <p>São Paulo - SP</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

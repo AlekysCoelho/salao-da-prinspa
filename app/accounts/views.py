@@ -1,13 +1,25 @@
 from django.contrib import auth, messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET
+from django.views.generic import TemplateView
 from rolepermissions.checkers import has_role
 
 User = get_user_model()
+
+
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_manager'] = has_role(self.request.user, ['manager'])
+        return context
+
 
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'

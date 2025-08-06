@@ -156,3 +156,7 @@ CELERY_TIMEZONE = "America/Sao_Paulo"
 CELERY_ROUTES = {
     "report.tasks.generate_report": {"queue": "update_generate_report"},
 }
+
+# Login urls
+LOGIN_REDIRECT_URL = 'accounts:home'
+LOGIN_URL = 'accounts:login'

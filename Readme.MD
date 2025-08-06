@@ -52,7 +52,7 @@ RABBITMQ_DEFAULT_PASS=password
 ```bash
 pip install -r requirements.txt
 ```
-
+e
 4. Execute com Docker Compose
 ```bash
 docker-compose up --build

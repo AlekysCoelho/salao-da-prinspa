@@ -28,4 +28,4 @@ def report_view(request):
         if result.ready():
             report_result = result.result
 
-    return render(request, "reports/report.html", {"form": form, "report_result": report_result})
+    return render(request, "reports/reports.html", {"form": form, "report_result": report_result})
