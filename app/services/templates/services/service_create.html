@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen bg-background p-6">
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold text-textColor mb-8">Criar Novo Serviço</h1>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-4 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-500{% else %}bg-red-500{% endif %} text-white">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="bg-gray-800 rounded-lg shadow-lg p-6">
+            {% csrf_token %}
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-textColor mb-2">
+                        Nome do Serviço
+                    </label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-textColor mb-2">
+                        Descrição
+                    </label>
+                    {{ form.description }}
+                    {% if form.description.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.description.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-textColor mb-2">
+                        Preço (R$)
+                    </label>
+                    {{ form.price }}
+                    {% if form.price.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.price.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-textColor mb-2">
+                        Duração (minutos)
+                    </label>
+                    {{ form.duration }}
+                    {% if form.duration.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.duration.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <a href="{% url 'service:list' %}" 
+                       class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">
+                        Cancelar
+                    </a>
+                    <button type="submit" 
+                            class="px-4 py-2 bg-primary text-black rounded-md hover:bg-green-400 transition-colors">
+                        Criar Serviço
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded shadow">
+  <h1 class="text-2xl font-bold mb-4">Relatório de Serviços Concluídos</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="grid grid-cols-2 gap-4">
+      {{ form.start_date.label_tag }} {{ form.start_date }}
+      {{ form.end_date.label_tag }} {{ form.end_date }}
+    </div>
+    <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Gerar Relatório</button>
+  </form>
+
+  {% if report_result is not None %}
+    <div class="mt-6 p-4 bg-green-100 border border-green-300 rounded">
+      <strong>Total de serviços concluídos:</strong> {{ report_result }}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

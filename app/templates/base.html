@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sistema de Agendamento{% endblock %}</title>
+
+    <!-- TailwindCSS CDN (para dev; em produção use compilado) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#27F568',
+                        background: 'rgb(15,23,42)',
+                        textColor: '#eeeeee'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- CSRF para HTMX -->
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        });
+    </script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="h-full flex flex-col min-h-screen bg-background text-textColor">
+
+    <!-- Header (opcional para páginas com barra superior) -->
+    {% block header %}
+    {% endblock %}
+
+    <!-- Conteúdo principal -->
+    <main class="flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer (opcional) -->
+    {% block footer %}
+    <footer class="text-center text-xs text-gray-400 p-4">
+        &copy; {{ year|default:"2025" }} Salão de Beleza. Todos os direitos reservados.
+    </footer>
+    {% endblock %}
+</body>
+</html>
